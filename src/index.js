@@ -16,6 +16,16 @@ router.get("/user/get", async (ctx) => {
     };
 });
 
+router.get("/goods/get", async (ctx) => {
+  ctx.body = {
+    code: 0,
+    data: {
+      info: '商品信息'
+    },
+    msg: '成功',
+  };
+});
+
 router.post("/user/edit", async (ctx) => {
     ctx.body = {
       code: 0,
