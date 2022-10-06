@@ -1,9 +1,17 @@
 // server/index.js
 const Koa = require("koa");
 const KoaRouter = require("koa-router");
+const bodyParser = require("koa-bodyparser");
 const path = require("path");
 const app = new Koa();
 const router = new KoaRouter();
+
+app.use(bodyParser()); // 处理 post 请求参数
+
+// 小程序接口
+const mpServer = require("./mpServer/index.js");
+mpServer.init(router);
+app.use(mpServer.verifyToken()); // token 校验中间件
 
 router.get("/user/get", async (ctx) => {
     ctx.body = {
