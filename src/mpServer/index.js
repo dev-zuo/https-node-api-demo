@@ -1,6 +1,7 @@
 const http = require('http')
 const https = require('https')
 const jwt = require('jsonwebtoken');
+const dbOptTest = require('./dbOptTest.js')
 
 const privateKey = 'privateKey_xxxxx'
 const init = (router) => {
@@ -38,6 +39,7 @@ const init = (router) => {
         }
        
     })
+    dbOptTest.init(router)
 }
 
 const appid = 'wxddd0151231a29656';

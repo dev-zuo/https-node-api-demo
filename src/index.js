@@ -5,6 +5,7 @@ const bodyParser = require("koa-bodyparser");
 const path = require("path");
 const app = new Koa();
 const router = new KoaRouter();
+const mongodbCore = require("./mpServer/mongodb.js");
 
 app.use(bodyParser()); // 处理 post 请求参数
 
@@ -12,6 +13,9 @@ app.use(bodyParser()); // 处理 post 请求参数
 const mpServer = require("./mpServer/index.js");
 mpServer.init(router);
 app.use(mpServer.verifyToken()); // token 校验中间件
+
+// 连接 mongodb，初始化 db
+mongodbCore.init({dbName: 'mp-cloud-db'})
 
 router.get("/user/get", async (ctx) => {
     ctx.body = {
